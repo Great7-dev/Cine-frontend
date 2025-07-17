@@ -106,7 +106,7 @@ export const WeatherContainer = styled.View`
 
 // Helper function to calculate header height
 export const getHeaderHeight = (variant: string) => {
-  const baseHeight = 100; // Base header with logo and buttons
-  const welcomeHeight = variant === "home" ? 120 : 60; // Additional height for welcome content
+  const baseHeight = 100; 
+  const welcomeHeight = variant === "home" ? 120 : 60; 
   return baseHeight + welcomeHeight;
 };

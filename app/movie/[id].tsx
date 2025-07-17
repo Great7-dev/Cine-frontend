@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Image, ActivityIndicator, Dimensions } from "react-native";
+import { useEffect, useState, useLayoutEffect } from "react";
+import { Image, ActivityIndicator } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { WebView } from "react-native-webview";
 import { Star, Clock, Calendar, Users } from "lucide-react-native";
 import type { Movie } from "@/types/movie";
 import { movieService } from "@/services/movieService";
@@ -23,10 +22,7 @@ import {
 } from "@/components/styled/Typography";
 import { theme } from "@/styles/theme";
 import { useNavigation } from "@react-navigation/native";
-import { useLayoutEffect } from "react";
-import ReactPlayer from "react-player";
 import AnimatedBackground from "@/components/ui/AnimatedBackground";
-const { width } = Dimensions.get("window");
 
 export default function MovieDetails() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -37,6 +33,13 @@ export default function MovieDetails() {
 
   const navigation = useNavigation();
 
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "", // hides the title
+      headerBackTitleVisible: false, // hides "Back" text on iOS
+    });
+  }, [navigation]);
+
   useEffect(() => {
     const loadDetails = async () => {
       try {
@@ -45,10 +48,7 @@ export default function MovieDetails() {
         // const trailer = videos[0] ?? null; // get first video, or null if empty
         setMovie(data);
         setVideoKey(videos[0]?.key || null); // get first video key or null if no videos
-        console.log("Movie details:", data);
-        console.log("videos", videos);
-
-        navigation.setOptions({ title: data.title });
+        // navigation.setOptions({ title: data.title });
       } catch (err) {
         console.error(err);
       } finally {

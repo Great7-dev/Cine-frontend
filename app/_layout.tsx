@@ -7,7 +7,6 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import "react-native-reanimated";
-// import { TailwindProvider } from "nativewind";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function RootLayout() {
@@ -26,6 +25,22 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen
+          name="movie/[id]"
+          options={{
+            headerTitle: "",
+            headerShown: true,
+            title: "",
+          }}
+        />
+        <Stack.Screen
+          name="movies/[category]"
+          options={{
+            headerTitle: "",
+            headerShown: true,
+            title: "",
+          }}
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
